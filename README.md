@@ -1,6 +1,8 @@
 [小车代码详解.md](https://github.com/user-attachments/files/29727881/default.md)
 # ESP32-Camera-Tracking-Car
 ESP32 photoelectric camera tracking car
+[小车代码详解.md](https://github.com/user-attachments/files/29728250/default.md)
+
 # 光电循迹小车代码详解
 
 > 本文档详细解释双ESP32光电循迹智能小车的完整代码，帮助你从零理解每一行代码的作用。
@@ -19,7 +21,7 @@ ESP32 photoelectric camera tracking car
   - [6. 硬件初始化](#6-硬件初始化)
   - [7. 循线传感器处理（模拟归一化）](#7-循线传感器处理模拟归一化)
   - [8. 主程序 — 完整控制循环](#8-主程序--完整控制循环)
-- [文件二：main(1).cpp — 视觉/姿态板（ESP32-S3）](#文件二main1cpp--视觉姿态板esp32-s3)
+- [文件二：main(视觉，姿态).cpp — 视觉/姿态板（ESP32-S3）](#文件二main视觉姿态cpp--视觉姿态板esp32-s3)
   - [1. 常量与全局变量](#1-常量与全局变量)
   - [2. I²C 自动发现与 MPU6050 驱动](#2-ic-自动发现与-mpu6050-驱动)
   - [3. 陀螺仪零偏标定](#3-陀螺仪零偏标定)
@@ -47,7 +49,7 @@ ESP32 photoelectric camera tracking car
          ▼                    │                ▼
 ┌─────────────────┐   ┌─────────────────┐
 │  ESP32 V1 主控板  │◄──┤ ESP32-S3 姿态板 │
-│  (main.cpp)      │UART│ (main(1).cpp)   │
+│  (main.cpp)      │UART│ (main(视觉，姿态).cpp)   │
 │                 │    │                 │
 │ • 传感器ADC读取   │    │ • MPU6050陀螺仪  │
 │ • 模拟归一化      │    │ • I²C自动发现    │
@@ -717,7 +719,7 @@ extern "C" void app_main(void) {
 
 ---
 
-## 文件二：main(1).cpp — 视觉/姿态板（ESP32-S3）
+## 文件二：main(视觉，姿态).cpp — 视觉/姿态板（ESP32-S3）
 
 **功能**：感知增强单元，负责 MPU6050 陀螺仪姿态检测和直道/弯道判别，通过 UART 向主控板发送标志位。
 
@@ -1200,7 +1202,7 @@ extern "C" void app_main(void) {
 | LEFT_KM_PPS_PER_PWM | 90 | 左轮PWM→速度斜率 |
 | RIGHT_KM_PPS_PER_PWM | 95 | 右轮PWM→速度斜率 |
 
-### main(1).cpp 核心参数
+### main(视觉，姿态).cpp 核心参数
 
 | 参数 | 值 | 说明 |
 |------|------|------|
@@ -1228,4 +1230,4 @@ extern "C" void app_main(void) {
 
 ---
 
-*文档基于实际代码生成，所有参数值均来自 main.cpp 和 main(1).cpp 的实际定义。*
+*文档基于实际代码生成，所有参数值均来自 main.cpp 和 main(视觉，姿态).cpp 的实际定义。*
